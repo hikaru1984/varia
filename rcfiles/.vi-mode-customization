@@ -1,0 +1,25 @@
+DEFAULT_VI_MODE=viins
+
+KEYTIMEOUT=1
+
+zle-line-init() {
+    zle -K $DEFAULT_VI_MODE
+}
+
+bindkey '^[[3~' delete-char
+bindkey '^[[H'  beginning-of-line
+bindkey '^[[F'  end-of-line
+
+autoload -Uz edit-command-line
+bindkey -M vicmd 'v' edit-command-line
+zle -N edit-command-line
+
+quit() {
+    exit
+}
+zle -N quit
+
+q() {
+    exit
+}
+zle -N q
