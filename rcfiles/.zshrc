@@ -24,13 +24,13 @@ ZSH_THEME="aphrodite"
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="false"
 
 # Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
+DISABLE_UPDATE_PROMPT="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+export UPDATE_ZSH_DAYS=14
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS=true
@@ -68,7 +68,7 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(archlinux git vi-mode)
+plugins=(archlinux git vi-mode-julka)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -83,7 +83,7 @@ export LANG=pl_PL.UTF-8
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='mvim'
+  export EDITOR='nvim'
 fi
 
 # Compilation flags
@@ -114,6 +114,6 @@ alias gst='git stage'
 alias gdiff='git difftool'
 alias gmerge='git mergetool'
 alias gvim='gvim.exe'
-alias grep='grep --color --binary-files=without-match -rnH -e $1 $*'
+alias grepf='grep --color --binary-files=without-match -rnH -e $1 $*'
 
 source $HOME/.vi-mode-customization
