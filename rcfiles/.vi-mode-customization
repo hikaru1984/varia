@@ -1,3 +1,4 @@
+#!/bin/zsh
 DEFAULT_VI_MODE=viins
 
 KEYTIMEOUT=1
@@ -7,8 +8,8 @@ zle-line-init() {
 }
 
 bindkey '^[[3~' delete-char
-bindkey '^[[H'  beginning-of-line
-bindkey '^[[F'  end-of-line
+bindkey '^[[1~'  beginning-of-line
+bindkey '^[[4~'  end-of-line
 
 autoload -Uz edit-command-line
 bindkey -M vicmd 'v' edit-command-line

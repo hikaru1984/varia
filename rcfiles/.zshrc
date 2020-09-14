@@ -2,13 +2,13 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/sopelek/.oh-my-zsh"
+export ZSH="/usr/share/oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="aphrodite"
+ZSH_THEME="jul"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -24,7 +24,7 @@ ZSH_THEME="aphrodite"
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-DISABLE_AUTO_UPDATE="false"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to automatically update without prompting.
 DISABLE_UPDATE_PROMPT="true"
@@ -59,6 +59,13 @@ ENABLE_CORRECTION="true"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="dd.mm.yyyy"
+HIST_IGNORE_SPACE="true"
+HIST_IGNORE_ALL_DUPS="true"
+
+HISTIGNORE="clear:exit:$HISTIGNORE"
+export HISTIGNORE 
+
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -68,7 +75,7 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(archlinux git vi-mode-julka)
+plugins=(archlinux git jul-zsh-vi tmux)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -81,9 +88,9 @@ export LANG=pl_PL.UTF-8
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
+    export EDITOR='vim'
 else
-  export EDITOR='nvim'
+    export EDITOR='nvim'
 fi
 
 # Compilation flags
@@ -99,13 +106,16 @@ fi
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Export display for using Xming in WSL
-export DISPLAY=:0.0
+if [ -z $DISPLAY ]; then
+    export DISPLAY=:0.0
+fi
 
 alias ls='ls --color'
 alias ll='ls -la'
 alias la='ls -a'
 alias vi='nvim'
 alias vim='nvim'
+alias e='nvim'
 alias gs='git status'
 alias gl='git log'
 alias gc='git commit'
@@ -116,4 +126,15 @@ alias gmerge='git mergetool'
 alias gvim='gvim.exe'
 alias grepf='grep --color --binary-files=without-match -rnH -e $1 $*'
 
+source $HOME/.sopelek-functions.zsh
+
+precmd_functions+=(j_fix_cursor)
+
+if which tmux 2>&1 >/dev/null; then
+    if [ -t 0 ] && [[ -z "$SSH_CONNECTION" ]] && [[ -z $TMUX ]]; then
+        tmux attach -t julia || tmux new -s julia; exit
+    fi
+fi
+
 source $HOME/.vi-mode-customization
+
