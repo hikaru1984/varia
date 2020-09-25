@@ -1,0 +1,110 @@
+let &pythonthreedll = 'C:\Python37-32\python37.dll'
+if has('python3')
+    silent! python3 1
+endif
+
+set nocompatible
+filetype off
+
+set rtp+=$HOME/.vim/bundle/Vundle.vim/
+call vundle#begin('$HOME/.vim/bundle/')
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'valloric/youcompleteme'
+Plugin 'eagletmt/neco-ghc'
+Plugin 'ap/vim-css-color'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'Yggdroot/indentLine'
+Plugin 'chriskempson/base16-vim'
+Plugin 'liuchengxu/vista.vim'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'kana/vim-operator-user'
+Plugin 'rhysd/vim-clang-format'
+
+call vundle#end()
+filetype plugin indent on
+
+if has('gui_running')
+    set encoding=utf-8 fileencoding=utf-8 fileencodings=utf-8,latin-1,cp1250,cp1251,koi8-r,koi8-u,iso-8859-1,iso-8859-2
+    if has('gui_win32')
+        set guifont=Inconsolata:h11
+    else
+        set guifont=Inconsolata\ 11
+    endif
+endif
+
+syntax on
+set t_Co=256
+colorscheme base16-horizon-dark
+set linespace=2
+set wildmenu autoindent
+set expandtab shiftwidth=4 softtabstop=4
+set number numberwidth=4 
+if has('gui_running') && has('gui_win32')
+    set guicursor+=v:vCursor
+endif
+set lines=36 columns=160
+set backspace=2
+set foldmethod=indent foldnestmax=10 nofoldenable foldlevel=2
+set cursorline
+set hidden
+
+nmap <C-N> :set invrelativenumber<CR>
+
+let g:ycm_confirm_extra_conf = 0
+if has('gui_running') && has('gui_win32')
+    let g:ycm_goto_buffer_command = 'new-or-existing-tab'
+else
+    let g:ycm_goto_buffer_command = 'new-buffer'
+endif
+nmap <F2> :YcmCompleter GoToInclude<CR>
+nmap <F3> :YcmCompleter GoToDefinition<CR>
+nmap <F4> :YcmCompleter GoToDeclaration<CR>
+nmap <F5> :YcmCompleter GoToReferences<CR>
+nmap <F12> :YcmCompleter GetDoc<CR>
+
+let g:indentLine_char = '|'
+let g:indentLine_leadingSpaceEnabled = 1
+let g:indentLine_leadingSpaceChar = '•'
+
+set lcs+=space:•
+nmap <C-L> :set invlist<CR>
+
+set clipboard^=unnamed,unnamedplus
+nmap <Leader>y "*y
+nmap <Leader>p "*p
+nmap <Leader>d "*d
+nmap <Leader>Y "+y
+nmap <Leader>P "+p
+nmap <Leader>D "+D
+
+if has('gui_running') && has('gui_win32')
+    set langmenu=pl_PL
+    let $LANG='pl_PL'
+endif
+
+map <esc>OH <home>
+cmap <esc>OH <home>
+imap <esc>OH <home>
+map <esc>OF <end>
+cmap <esc>OF <end>
+imap <esc>OF <end>
+
+if has('gui_running') && has('gui_win32')
+    nmap <S-Left> gT
+    nmap <S-Right> gt
+else
+    nmap <S-Left> :bprev<CR>
+    nmap <S-Right> :bnext<CR>
+endif
+nmap <S-X> :bd<CR>
+
+nmap <F8> :Vista!!<CR>
+
+let g:clang_format#code_style = 'google'
+
+if has('gui_running') && has('gui_win32')
+    source $VIMRUNTIME/delmenu.vim
+    source $VIMRUNTIME/menu.vim
+endif
