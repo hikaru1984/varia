@@ -66,7 +66,6 @@ HIST_IGNORE_ALL_DUPS="true"
 HISTIGNORE="clear:exit:$HISTIGNORE"
 export HISTIGNORE 
 
-
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
@@ -75,7 +74,7 @@ export HISTIGNORE
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(archlinux git jul-zsh-vi tmux)
+plugins=(git jul-zsh-vi tmux)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -105,16 +104,12 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Export display for using Xming in WSL
-if [ -z $DISPLAY ]; then
-    export DISPLAY=:0.0
-fi
-
-alias ls='ls --color'
+alias ls='ls'
 alias ll='ls -la'
 alias la='ls -a'
 alias vi='nvim'
 alias vim='nvim'
+alias vimdiff='nvim -d'
 alias e='nvim'
 alias gs='git status'
 alias gl='git log'
@@ -123,8 +118,9 @@ alias gam='git commit --amend'
 alias gst='git stage'
 alias gdiff='git difftool'
 alias gmerge='git mergetool'
-alias gvim='gvim.exe'
 alias grepf='grep --color --binary-files=without-match -rnH -e $1 $*'
+
+unset BEEP
 
 source $HOME/.sopelek-functions.zsh
 

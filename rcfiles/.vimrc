@@ -3,7 +3,7 @@ set nocompatible
 set noerrorbells visualbell t_vb=
 filetype off
 
-set shell=/bin/zsh
+set shell=/usr/local/bin/zsh
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -12,24 +12,13 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 if !(&diff)
     Plugin 'ap/vim-buftabline'
-    Plugin 'scrooloose/nerdtree'
     Plugin 'majutsushi/tagbar'
+    Plugin 'franbach/miramare'
 endif
 Plugin 'Yggdroot/indentLine'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
-
-let g:NERDTreeDirArrowExpandable = '>'
-let g:NERDTreeDirArrowCollapsible = 'V'
-
-if !(&diff)
-    autocmd StdinReadPre * let s:std_in=1
-    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-    map <C-T> :NERDTreeToggle<CR>
-    map <C-Y> :NERDTreeFocus<CR>
-endif
 
 set clipboard^=unnamed,unnamedplus
 nmap <Leader>y "*y
@@ -40,7 +29,7 @@ nmap <Leader>P "+p
 nmap <Leader>D "+D
 
 set termguicolors
-colorscheme azuki
+colorscheme miramare
 syntax on
 set wildmenu
 set wrap wrapmargin=160 textwidth=160
@@ -54,13 +43,12 @@ nmap <C-N> :set invrelativenumber<CR>
 
 let g:indentLine_char = '|'
 let g:indentLine_leadingSpaceEnabled = 1
-let g:indentLine_leadingSpaceChar = '•'
-
+let g:indentLine_leadingSpaceChar = "\u2022"
 set encoding=utf-8 fileencoding=utf-8
 
-nnoremap <C-Right> :bnext<CR>
-nnoremap <C-Left> :bprev<CR>
-nnoremap <C-D> :bd<CR>
+nnoremap <S-k> :bnext<CR>
+nnoremap <S-j> :bprev<CR>
+nnoremap <S-d> :bd<CR>
 
 map <esc>OH <home>
 cmap <esc>OH <home>
@@ -71,5 +59,3 @@ imap <esc>OF <end>
 
 set lcs+=space:·
 nmap <C-L> :set invlist<CR>
-
-nmap <F8> :TagbarToggle<CR>

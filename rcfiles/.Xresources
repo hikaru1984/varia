@@ -1,0 +1,75 @@
+! special
+*.foreground:   #c8dfac
+*.background:   #060804
+*.cursorColor:  #c8dfac
+
+! black
+*.color0:       #0c0f09
+*.color8:       #fcb256
+
+! red
+*.color1:       #161a12
+*.color9:       #94ba57
+
+! green
+*.color2:       #272c20
+*.color10:      #8ad3f5
+
+! yellow
+*.color3:       #3d4533
+*.color11:      #e49d38
+
+! blue
+*.color4:       #5a654c
+*.color12:      #b5df74
+
+! magenta
+*.color5:       #7c8b6a
+*.color13:      #e79c20
+
+! cyan
+*.color6:       #a5b88e
+*.color14:      #a9d55f
+
+! white
+*.color7:       #d3ebb6
+*.color15:      #a1daf7
+
+xterm*dynamiccolors:      true
+xterm*visualBell:         off
+xterm*highlightSelection: true
+
+URxvt*termName: screen-256color
+URxvt*iso14755: false
+URxvt*iso14755_52: false
+URxvt.imLocale: pl_PL.UTF-8
+URxvt.imFont: xft:Inconsolata:style=Regular:size=15
+
+URxvt*visualBell: off
+URxvt*urgentOnBell: true
+
+URxvt.font: xft:Inconsolata:style=Regular:size=15
+URxvt.boldFont: xft:Inconsolata:style=Bold:size=15
+URxvt.italicFont: xft:Inconsolata:style=Italic:size=15
+URxvt.boldItalicFont: xft:Inconsolata:style=Bold Italic:size=15
+
+URxvt.xftAntialias: true
+URxvt.xftHinting: true
+URxvt.letterSpace: -1
+
+Xft.dpi: 96
+Xft.antialias: true
+Xft.rgba: rgb
+Xft.hinting: true
+
+URxvt*scrollTtyOutput: false
+URxvt.clipboard.autocopy: true
+URxvt*scrollBar: false
+! URxvt*depth: 80
+URxvt*dynamicColors: on
+
+URxvt.copyCommand: xclip -i -selection clipboard
+URxvt.pasteCommand: xclip -o -selection clipboard
+URxvt.urlLauncher: chrome
+URxvt.underlineURLs: true
+URxvt.urlButton: 1
