@@ -43,6 +43,7 @@ nmap <Leader>Y "+y
 nmap <Leader>P "+p
 nmap <Leader>D "+D
 
+let g:ycm_use_clangd = 1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_goto_buffer_command = 'new-buffer'
 let g:ycm_min_num_of_chars_for_completion = 3
