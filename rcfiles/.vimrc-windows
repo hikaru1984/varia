@@ -12,15 +12,16 @@ call vundle#begin('$HOME/.vim/bundle/')
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'valloric/youcompleteme'
+Plugin 'file://$HOME/.vim/bundle/vimproc'
 Plugin 'eagletmt/neco-ghc'
 Plugin 'ap/vim-css-color'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'Yggdroot/indentLine'
 Plugin 'chriskempson/base16-vim'
 Plugin 'liuchengxu/vista.vim'
-Plugin 'Shougo/vimproc.vim'
 Plugin 'kana/vim-operator-user'
 Plugin 'rhysd/vim-clang-format'
+Plugin 'bluz71/vim-nightfly-guicolors'
 
 call vundle#end()
 filetype plugin indent on
@@ -28,27 +29,29 @@ filetype plugin indent on
 if has('gui_running')
     set encoding=utf-8 fileencoding=utf-8 fileencodings=utf-8,latin-1,cp1250,cp1251,koi8-r,koi8-u,iso-8859-1,iso-8859-2
     if has('gui_win32')
-        set guifont=Inconsolata:h11
+        set guifont=Inconsolata:h12
     else
-        set guifont=Inconsolata\ 11
+        set guifont=Inconsolata\ 12
     endif
 endif
 
 syntax on
 set t_Co=256
-colorscheme base16-horizon-dark
+colorscheme nightfly
 set linespace=2
 set wildmenu autoindent
 set expandtab shiftwidth=4 softtabstop=4
 set number numberwidth=4 
 if has('gui_running') && has('gui_win32')
     set guicursor+=v:vCursor
+    set guioptions+=r 
 endif
 set lines=36 columns=160
 set backspace=2
 set foldmethod=indent foldnestmax=10 nofoldenable foldlevel=2
 set cursorline
 set hidden
+set linebreak showbreak=~ breakindent breakindentopt=shift:4
 
 nmap <C-N> :set invrelativenumber<CR>
 
@@ -58,6 +61,9 @@ if has('gui_running') && has('gui_win32')
 else
     let g:ycm_goto_buffer_command = 'new-buffer'
 endif
+let g:ycm_min_num_of_chars_for_completion = 3
+let g:ycm_max_num_candidates = 500
+let g:ycm_max_num_identifier_candidates = 35
 nmap <F2> :YcmCompleter GoToInclude<CR>
 nmap <F3> :YcmCompleter GoToDefinition<CR>
 nmap <F4> :YcmCompleter GoToDeclaration<CR>
@@ -69,9 +75,22 @@ let g:indentLine_leadingSpaceEnabled = 1
 let g:indentLine_leadingSpaceChar = '•'
 
 set lcs+=space:•
-nmap <C-L> :set invlist<CR>
+nmap <S-L> :set invlist<CR>
 
-set clipboard^=unnamed,unnamedplus
+" set clipboard^=unnamed,unnamedplus
+let g:clipboard = {
+         \ 'name': 'win32yank.exe',
+         \ 'copy': {
+         \   '+': 'win32yank.exe -i --crlf',
+         \   '*': 'win32yank.exe -i --crlf',
+         \   },
+         \ 'paste': {
+         \   '+': 'win32yank.exe -o --lf',
+         \   '*': 'win32yank.exe -o --lf',
+         \   },
+         \ 'cache_enabled': 1,
+         \ }
+
 nmap <Leader>y "*y
 nmap <Leader>p "*p
 nmap <Leader>d "*d
@@ -92,17 +111,19 @@ cmap <esc>OF <end>
 imap <esc>OF <end>
 
 if has('gui_running') && has('gui_win32')
-    nmap <S-Left> gT
-    nmap <S-Right> gt
+    nmap <S-j> gT
+    nmap <S-k> gt
 else
-    nmap <S-Left> :bprev<CR>
-    nmap <S-Right> :bnext<CR>
+    nmap <S-j> :bprev<CR>
+    nmap <S-k> :bnext<CR>
 endif
 nmap <S-X> :bd<CR>
 
 nmap <F8> :Vista!!<CR>
 
 let g:clang_format#code_style = 'google'
+
+let g:vimproc#dll_path = '$HOME/.vim/bundle/vimproc/lib/vimproc_win32.dll'
 
 if has('gui_running') && has('gui_win32')
     source $VIMRUNTIME/delmenu.vim

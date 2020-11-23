@@ -10,28 +10,32 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'chriskempson/base16-vim'
+Plugin 'lifepillar/vim-colortemplate'
 if !(&diff)
+    Plugin 'valloric/youcompleteme'
     Plugin 'ap/vim-buftabline'
-    Plugin 'scrooloose/nerdtree'
     Plugin 'majutsushi/tagbar'
+    Plugin 'itchyny/lightline.vim'
+    Plugin 'Shougo/vimproc.vim'
 endif
 Plugin 'Yggdroot/indentLine'
 
-call vundle#end()            " required
-filetype plugin indent on    " required
+call vundle#end()
+filetype plugin indent on
 
-let g:NERDTreeDirArrowExpandable = '>'
-let g:NERDTreeDirArrowCollapsible = 'V'
-
-if !(&diff)
-    autocmd StdinReadPre * let s:std_in=1
-    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-    map <C-T> :NERDTreeToggle<CR>
-    map <C-Y> :NERDTreeFocus<CR>
-endif
-
-set clipboard^=unnamed,unnamedplus
+let g:clipboard = {
+         \ 'name': 'xclip',
+         \ 'copy': {
+         \   '+': 'xclip -i',
+         \   '*': 'xclip -i'
+         \   },
+         \ 'paste': {
+         \   '+': 'xclip -o',
+         \   '*': 'xclip -o'
+         \   },
+         \ 'cache_enabled': 1
+         \ }
 nmap <Leader>y "*y
 nmap <Leader>p "*p
 nmap <Leader>d "*d
@@ -39,11 +43,28 @@ nmap <Leader>Y "+y
 nmap <Leader>P "+p
 nmap <Leader>D "+D
 
-set termguicolors
-colorscheme azuki
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_goto_buffer_command = 'new-buffer'
+let g:ycm_min_num_of_chars_for_completion = 3
+let g:ycm_max_num_candidates = 500
+let g:ycm_max_num_identifier_candidates = 35
+nmap <F2> :YcmCompleter GoToInclude<CR>
+nmap <F3> :YcmCompleter GoToDefinition<CR>
+nmap <F4> :YcmCompleter GoToDeclaration<CR>
+nmap <F5> :YcmCompleter GoToReferences<CR>
+nmap <F12> :YcmCompleter GetDoc<CR>
+
+if !(&diff)
+    set termguicolors
+    colorscheme darkness
+else
+    set t_Co=256
+    colorscheme darkness
+endif
 syntax on
 set wildmenu
 set wrap wrapmargin=160 textwidth=160
+set linebreak showbreak=~ breakindentopt=shift:4 
 set smarttab tabstop=4 shiftwidth=4 expandtab softtabstop=4
 set number numberwidth=5
 set backspace=indent,eol,start
@@ -55,12 +76,11 @@ nmap <C-N> :set invrelativenumber<CR>
 let g:indentLine_char = '|'
 let g:indentLine_leadingSpaceEnabled = 1
 let g:indentLine_leadingSpaceChar = '•'
-
 set encoding=utf-8 fileencoding=utf-8
 
-nnoremap <C-Right> :bnext<CR>
-nnoremap <C-Left> :bprev<CR>
-nnoremap <C-D> :bd<CR>
+nnoremap <S-k> :bnext<CR>
+nnoremap <S-j> :bprev<CR>
+nnoremap <S-d> :bd<CR>
 
 map <esc>OH <home>
 cmap <esc>OH <home>
@@ -69,7 +89,16 @@ map <esc>OF <end>
 cmap <esc>OF <end>
 imap <esc>OF <end>
 
-set lcs+=space:·
-nmap <C-L> :set invlist<CR>
+set lcs+=space:•
+nmap <S-l> :set invlist<CR>
 
-nmap <F8> :TagbarToggle<CR>
+if !(&diff)
+    nmap <F5> :TagbarToggle<CR>
+    autocmd BufNewFile,BufRead *.[ch]   :TagbarOpen<CR>
+    autocmd BufNewFile,BufRead *.[ch]pp :TagbarOpen<CR>
+endif
+
+hi DiffText   cterm=none ctermfg=Red ctermbg=Black gui=none guifg=Red guibg=Black
+hi DiffChange cterm=none ctermfg=Yellow ctermbg=Black gui=none guifg=Yellow guibg=Black
+hi DiffAdd    cterm=none ctermfg=Black ctermbg=Green gui=none guifg=Black guibg=Green
+hi DiffDelete cterm=none ctermfg=Grey ctermbg=Green gui=none guifg=Grey guibg=Green
