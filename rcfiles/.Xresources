@@ -1,75 +1,81 @@
-! special
-*.foreground:   #c8dfac
-*.background:   #060804
-*.cursorColor:  #c8dfac
-
+*background: #121858
+*foreground: #dae8fc
 ! black
-*.color0:       #0c0f09
-*.color8:       #fcb256
-
+*color0: #121858
+! bright_black
+*color8: #2b3171
 ! red
-*.color1:       #161a12
-*.color9:       #94ba57
-
+*color1: #b6302d
+! bright_red
+*color9: #ecb3b2
 ! green
-*.color2:       #272c20
-*.color10:      #8ad3f5
-
+*color2: #2db630
+! bright_green
+*color10: #b2ecb3
 ! yellow
-*.color3:       #3d4533
-*.color11:      #e49d38
-
+*color3: #b4b62d
+! bright_yellow
+*color11: #ebecb2
 ! blue
-*.color4:       #5a654c
-*.color12:      #b5df74
-
+*color4: #302db6
+! bright_blue
+*color12: #b3b2ec
 ! magenta
-*.color5:       #7c8b6a
-*.color13:      #e79c20
-
+*color5: #b62db4
+! bright_magenta
+*color13: #ecb2eb
 ! cyan
-*.color6:       #a5b88e
-*.color14:      #a9d55f
-
+*color6: #2db4b6
+! bright_cyan
+*color14: #b2ebec
 ! white
-*.color7:       #d3ebb6
-*.color15:      #a1daf7
+*color7: #adb3f3
+! bright_white
+*color15: #b9bfff
 
-xterm*dynamiccolors:      true
-xterm*visualBell:         off
-xterm*highlightSelection: true
+! Rofi
+rofi.font: monospace 12
+rofi.padding: 20
+rofi.line-padding: 2
+rofi.color-enabled: true
+rofi.hide-scrollbar: true
+rofi.separator-style: solid
+rofi.color-window: #121858, #919ba0, #121858
+rofi.color-normal: #121858, #919ba0, #121858, #a4a4a4, #121858
+rofi.color-urgent: argb:00000000, #f43753, argb:00000000, argb:00000000, #e29a49
+rofi.color-active: argb:00000000, #49bbfb, argb:00000000, argb:00000000, #e29a49
+rofi.kb-cancel: Escape,Alt+F1
 
-URxvt*termName: screen-256color
+! xterm
+xterm*termName: xterm-256color
+xterm*font: monospace
+xterm*faceName: monospace:size=14
+xterm*loginShell: true
+xterm*vt100*geometry: 90x34
+xterm*saveLines: 2000
+xterm*charClass: 33:48,35:48,37:48,43:48,45-47:48,64:48,95:48,126:48
+xterm*eightBitInput: false
+
+! URxvt
+URxvt*saveline: 15000
+URxvt*termName: rxvt-256color
 URxvt*iso14755: false
-URxvt*iso14755_52: false
-URxvt.imLocale: pl_PL.UTF-8
-URxvt.imFont: xft:Inconsolata:style=Regular:size=15
-
-URxvt*visualBell: off
-URxvt*urgentOnBell: true
-
-URxvt.font: xft:Inconsolata:style=Regular:size=15
-URxvt.boldFont: xft:Inconsolata:style=Bold:size=15
-URxvt.italicFont: xft:Inconsolata:style=Italic:size=15
-URxvt.boldItalicFont: xft:Inconsolata:style=Bold Italic:size=15
-
-URxvt.xftAntialias: true
-URxvt.xftHinting: true
-URxvt.letterSpace: -1
-
-Xft.dpi: 96
-Xft.antialias: true
-Xft.rgba: rgb
-Xft.hinting: true
-
-URxvt*scrollTtyOutput: false
-URxvt.clipboard.autocopy: true
+URxvt*depth: 32
+URxvt*background: [95]#0d1926
 URxvt*scrollBar: false
-! URxvt*depth: 80
-URxvt*dynamicColors: on
-
+URxvt*scrollBar_right: false
+URxvt*internalBorder: 0
+URxvt*externalBorder: 0
+URxvt*letterSpace: -1
+URxvt.font: xft:monospace:size=14
 URxvt.copyCommand: xclip -i -selection clipboard
 URxvt.pasteCommand: xclip -o -selection clipboard
-URxvt.urlLauncher: chrome
+URxvt.urlLauncher: exo-open
 URxvt.underlineURLs: true
 URxvt.urlButton: 1
+URxvt.geometry: 90x34
+URxvt.tabbed.tabbar-fg: 4
+URxvt.tabbed.tabbar-bg: 16
+URxvt.tabbed.tab-fg: 15
+URxvt.tabbed.tab-bg: 4
+URxvt*buffered: false
