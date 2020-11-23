@@ -10,6 +10,7 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'junk-e/identity.vim'
 Plugin 'chriskempson/base16-vim'
 Plugin 'lifepillar/vim-colortemplate'
 if !(&diff)
@@ -25,17 +26,17 @@ call vundle#end()
 filetype plugin indent on
 
 let g:clipboard = {
-         \ 'name': 'xclip',
-         \ 'copy': {
-         \   '+': 'xclip -i',
-         \   '*': 'xclip -i'
-         \   },
-         \ 'paste': {
-         \   '+': 'xclip -o',
-         \   '*': 'xclip -o'
-         \   },
-         \ 'cache_enabled': 1
-         \ }
+     \   'name': 'xclip',
+     \   'copy': {
+     \      '+': 'xclip -quiet -i -selection clipboard',
+     \      '*': 'xclip -quiet -i -selection primary',
+     \    },
+     \   'paste': {
+     \      '+': 'xclip -o -selection clipboard',
+     \      '*': 'xclip -o -selection primary',
+     \   },
+     \   'cache_enabled': 1,
+     \ }
 nmap <Leader>y "*y
 nmap <Leader>p "*p
 nmap <Leader>d "*d
@@ -57,7 +58,7 @@ nmap <F12> :YcmCompleter GetDoc<CR>
 
 if !(&diff)
     set termguicolors
-    colorscheme darkness
+    colorscheme identity
 else
     set t_Co=256
     colorscheme darkness
