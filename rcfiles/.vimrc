@@ -26,7 +26,7 @@ call vundle#end()
 filetype plugin indent on
 
 let g:clipboard = {
-     \   'name': 'myClipboard',
+     \   'name': 'xclip',
      \   'copy': {
      \      '+': 'xclip -quiet -i -selection clipboard',
      \      '*': 'xclip -quiet -i -selection primary',
