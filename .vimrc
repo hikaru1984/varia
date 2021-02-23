@@ -104,3 +104,9 @@ hi DiffText   cterm=none ctermfg=Red ctermbg=Black gui=none guifg=Red guibg=Blac
 hi DiffChange cterm=none ctermfg=Yellow ctermbg=Black gui=none guifg=Yellow guibg=Black
 hi DiffAdd    cterm=none ctermfg=Black ctermbg=Green gui=none guifg=Black guibg=Green
 hi DiffDelete cterm=none ctermfg=Grey ctermbg=Green gui=none guifg=Grey guibg=Green
+
+set wildcharm=<C-z>
+cnoremap <expr> <up>    wildmenumode() ? "\<left>"      : "\<up>"
+cnoremap <expr> <down>  wildmenumode() ? "\<right>"     : "\<down>"
+cnoremap <expr> <left>  wildmenumode() ? "\<up>"        : "\<left>"
+cnoremap <expr> <right> wildmenumode() ? " \<bs>\<C-z>" : "\<right>"

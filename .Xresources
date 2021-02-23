@@ -1,37 +1,31 @@
-*background: #121858
-*foreground: #dae8fc
+! special
+*.foreground:   #ffffff
+*.background:   #161616
+*.cursorColor:  #ffffff
 ! black
-*color0: #121858
-! bright_black
-*color8: #2b3171
+*.color0:       #222222
+*.color8:       #666666
 ! red
-*color1: #b6302d
-! bright_red
-*color9: #ecb3b2
+*.color1:       #e84f4f
+*.color9:       #d23d3d
 ! green
-*color2: #2db630
-! bright_green
-*color10: #b2ecb3
+*.color2:       #b7ce42
+*.color10:      #bde077
 ! yellow
-*color3: #b4b62d
-! bright_yellow
-*color11: #ebecb2
+*.color3:       #fea63c
+*.color11:      #ffe863
 ! blue
-*color4: #302db6
-! bright_blue
-*color12: #b3b2ec
+*.color4:       #66aabb
+*.color12:      #aaccbb
 ! magenta
-*color5: #b62db4
-! bright_magenta
-*color13: #ecb2eb
+*.color5:       #b7416e
+*.color13:      #e16a98
 ! cyan
-*color6: #2db4b6
-! bright_cyan
-*color14: #b2ebec
+*.color6:       #6d878d
+*.color14:      #42717b
 ! white
-*color7: #adb3f3
-! bright_white
-*color15: #b9bfff
+*.color7:       #dddddd
+*.color15:      #cccccc
 
 ! Rofi
 rofi.font: monospace 12
@@ -49,7 +43,7 @@ rofi.kb-cancel: Escape,Alt+F1
 ! xterm
 xterm*termName: xterm-256color
 xterm*font: monospace
-xterm*faceName: monospace:size=14
+xterm*faceName: monospace:size=12
 xterm*loginShell: true
 xterm*vt100*geometry: 90x34
 xterm*saveLines: 2000
@@ -67,7 +61,7 @@ URxvt*scrollBar_right: false
 URxvt*internalBorder: 0
 URxvt*externalBorder: 0
 URxvt*letterSpace: -1
-URxvt.font: xft:monospace:size=14
+URxvt.font: xft:monospace:size=12
 URxvt.copyCommand: xclip -i -selection clipboard
 URxvt.pasteCommand: xclip -o -selection clipboard
 URxvt.urlLauncher: exo-open

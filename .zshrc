@@ -1,5 +1,6 @@
 export ZSH="/usr/share/oh-my-zsh"
 export UPDATE_ZSH_DAYS=14
+export PATH="$PATH:$HOME/.local/bin"
 
 ZSH_THEME="jul"
 
@@ -11,10 +12,6 @@ ENABLE_CORRECTION="true"
 plugins=(archlinux git jul-zsh-vi)
 
 source $ZSH/oh-my-zsh.sh
-
-export LANG=pl_PL.UTF-8
-export EDITOR='nvim'
-
 source $HOME/.sopelek-functions.zsh
 source $HOME/.vi-mode-customization.zsh
 
@@ -62,7 +59,7 @@ alias grepf='grep --color --binary-files=without-match -rnH -e $1 $* 2>/dev/null
 unalias ls
 ls() # ls with preferred arguments
 {
-	command ls --color=auto -F1 "$@"
+	command ls --color=auto "$@"
 }
 
 cd() # cd and ls after
@@ -146,15 +143,24 @@ first_tab() # on first tab without any text it will list the current directory
 	fi
 }; zle -N first_tab
 
-exp_alias() # expand aliases to the left (if any) before inserting the key pressed
-{ # expand aliases
-	zle _expand_alias
-	zle self-insert
-}; zle -N exp_alias
+# exp_alias() # expand aliases to the left (if any) before inserting the key pressed
+# { # expand aliases
+#	zle _expand_alias
+#	zle self-insert
+# }; zle -N exp_alias
+
+tmux_init() # on first tab without any text it will list the current directory
+{ # empty line tab lists
+	if which tmux 2>&1 >/dev/null; then
+	    if [ -t 0 ] && [[ -z $TMUX ]]; then
+		tmux attach -t julia || tmux new -s julia; exit
+	    fi
+	fi
+}; zle -N tmux_init
 
 # bind keys not in terminfo
 bindkey -- '^I'   first_tab
-bindkey -- ' '    exp_alias
+# bindkey -- ' '    exp_alias
 bindkey -- '^P'   up-history
 bindkey -- '^N'   down-history
 bindkey -- '^E'   end-of-line
@@ -162,6 +168,7 @@ bindkey -- '^A'   beginning-of-line
 bindkey -- '^[^M' self-insert-unmeta # alt-enter to insert a newline/carriage return
 bindkey -- '^K'   up-line-or-beginning-search
 bindkey -- '^J'   down-line-or-beginning-search
+bindkey -- '^T'   tmux_init
 
 # default shell behaviour using terminfo keys
 [[ -n ${terminfo[kdch1]} ]] && bindkey -- "${terminfo[kdch1]}" delete-char                   # delete
