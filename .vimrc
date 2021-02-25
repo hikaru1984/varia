@@ -10,7 +10,6 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
-Plugin 'junk-e/identity.vim'
 Plugin 'chriskempson/base16-vim'
 Plugin 'lifepillar/vim-colortemplate'
 if !(&diff)
@@ -21,28 +20,30 @@ if !(&diff)
     Plugin 'Shougo/vimproc.vim'
 endif
 Plugin 'Yggdroot/indentLine'
+Plugin 'rrethy/vim-hexokinase'
+Plugin 'franbach/miramare'
 
 call vundle#end()
 filetype plugin indent on
 
 let g:clipboard = {
-     \   'name': 'xclip',
-     \   'copy': {
-     \      '+': 'xclip -quiet -i -selection clipboard',
-     \      '*': 'xclip -quiet -i -selection primary',
-     \    },
-     \   'paste': {
-     \      '+': 'xclip -o -selection clipboard',
-     \      '*': 'xclip -o -selection primary',
-     \   },
-     \   'cache_enabled': 1,
-     \ }
-nmap <Leader>y "*y
-nmap <Leader>p "*p
-nmap <Leader>d "*d
-nmap <Leader>Y "+y
-nmap <Leader>P "+p
-nmap <Leader>D "+D
+            \   'name': 'xclip',
+            \   'copy': {
+            \      '+': 'xclip -quiet -i -selection clipboard',
+            \      '*': 'xclip -quiet -i -selection primary',
+            \    },
+            \   'paste': {
+            \      '+': 'xclip -o -selection clipboard',
+            \      '*': 'xclip -o -selection primary',
+            \   },
+            \   'cache_enabled': 1,
+            \ }
+nmap <Leader>y "+y "*y
+nmap <Leader>p "+p "*p
+nmap <Leader>d "+d "*d
+nmap <Leader>Y "+y "*y
+nmap <Leader>P "+p "*p
+nmap <Leader>D "+D "*D
 
 let g:ycm_use_clangd = 1
 let g:ycm_confirm_extra_conf = 0
@@ -58,11 +59,12 @@ nmap <F12> :YcmCompleter GetDoc<CR>
 
 if !(&diff)
     set termguicolors
-    colorscheme identity
+    colorscheme miramare
 else
     set t_Co=256
     colorscheme darkness
 endif
+
 syntax on
 set wildmenu
 set wrap wrapmargin=160 textwidth=160
@@ -110,3 +112,24 @@ cnoremap <expr> <up>    wildmenumode() ? "\<left>"      : "\<up>"
 cnoremap <expr> <down>  wildmenumode() ? "\<right>"     : "\<down>"
 cnoremap <expr> <left>  wildmenumode() ? "\<up>"        : "\<left>"
 cnoremap <expr> <right> wildmenumode() ? " \<bs>\<C-z>" : "\<right>"
+
+let g:Hexokinase_highlighters = [
+            \   'virtual',
+            \   'foreground'
+            \ ]
+
+let g:Hexokinase_optInPatterns = [
+            \     'full_hex',
+            \     'triple_hex',
+            \     'rgb',
+            \     'rgba',
+            \     'hsl',
+            \     'hsla'
+            \ ]
+
+let g:Hexokinase_ftOptInPatterns = {
+            \     'css': 'full_hex,rgb,rgba,hsl,hsla,colour_names',
+            \     'html': 'full_hex,rgb,rgba,hsl,hsla,colour_names'
+            \ }
+
+let g:miramare_transparent_background = 1
