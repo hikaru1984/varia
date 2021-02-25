@@ -2,6 +2,13 @@ export ZSH="/usr/share/oh-my-zsh"
 export UPDATE_ZSH_DAYS=14
 export PATH="$PATH:$HOME/.local/bin"
 
+# variables for Lua development
+export LUAJIT_BIN=/sbin/luajit
+export LUAJIT_LIB=/usr/lib/libluajit-5.1.so
+export LUAJIT_LIB_DIR=/usr/lib/
+export LUAJIT_INC_DIR=/usr/include/luajit-2.0/
+export LUAJIT_SHARE_DIR=/usr/share/luajit-2.0.5/jit/
+
 ZSH_THEME="jul"
 
 DISABLE_AUTO_UPDATE="true"
@@ -12,13 +19,16 @@ ENABLE_CORRECTION="true"
 plugins=(archlinux git jul-zsh-vi)
 
 source $ZSH/oh-my-zsh.sh
-source $HOME/.sopelek-functions.zsh
 source $HOME/.vi-mode-customization.zsh
+
+j_fix_cursor() {
+    echo -ne '\e[3 q'
+}
 
 precmd_functions+=(j_fix_cursor)
 
 if [[ $- != *i* ]]; then
-	return
+    return
 fi
 
 # completion cache path setup
@@ -26,9 +36,9 @@ typeset -g comppath="$HOME/.cache"
 typeset -g compfile="$comppath/.zcompdump"
 
 if [[ -d "$comppath" ]]; then
-	[[ -w "$compfile" ]] || rm -rf "$compfile" >/dev/null 2>&1
+    [[ -w "$compfile" ]] || rm -rf "$compfile" >/dev/null 2>&1
 else
-	mkdir -p "$comppath"
+    mkdir -p "$comppath"
 fi
 
 # zsh internal stuff
@@ -55,25 +65,26 @@ alias gst='git stage'
 alias gdiff='git difftool'
 alias gmerge='git mergetool'
 alias grepf='grep --color --binary-files=without-match -rnH -e $1 $* 2>/dev/null'
+alias sudo='sudo '
 
 unalias ls
 ls() # ls with preferred arguments
 {
-	command ls --color=auto "$@"
+    command ls --color=auto "$@"
 }
 
 cd() # cd and ls after
 {
-	builtin cd "$@" && command ls --color=auto -F
+    builtin cd "$@" && command ls --color=auto -F
 }
 
 src() # recompile completion and reload zsh
 {
-	autoload -U zrecompile
-	rm -rf "$compfile"*
-	compinit -u -d "$compfile"
-	zrecompile -p "$compfile"
-	exec zsh
+    autoload -U zrecompile
+    rm -rf "$compfile"*
+    compinit -u -d "$compfile"
+    zrecompile -p "$compfile"
+    exec zsh
 }
 
 # less/manpager colours
@@ -128,34 +139,34 @@ autoload -U down-line-or-beginning-search; zle -N down-line-or-beginning-search
 
 # set the terminal mode when entering or exiting zle, otherwise terminfo keys are not loaded
 if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
-	zle-line-init() { echoti smkx; }; zle -N zle-line-init
-	zle-line-finish() { echoti rmkx; }; zle -N zle-line-finish
+    zle-line-init() { echoti smkx; }; zle -N zle-line-init
+    zle-line-finish() { echoti rmkx; }; zle -N zle-line-finish
 fi
 
 first_tab() # on first tab without any text it will list the current directory
 { # empty line tab lists
-	if [[ $#BUFFER == 0 ]]; then
-		BUFFER="cd " CURSOR=3
-		zle list-choices
-		BUFFER="" CURSOR=1
-	else
-		zle expand-or-complete
-	fi
+    if [[ $#BUFFER == 0 ]]; then
+        BUFFER="cd " CURSOR=3
+        zle list-choices
+        BUFFER="" CURSOR=1
+    else
+        zle expand-or-complete
+    fi
 }; zle -N first_tab
 
 # exp_alias() # expand aliases to the left (if any) before inserting the key pressed
 # { # expand aliases
-#	zle _expand_alias
-#	zle self-insert
+#   zle _expand_alias
+#   zle self-insert
 # }; zle -N exp_alias
 
 tmux_init() # on first tab without any text it will list the current directory
 { # empty line tab lists
-	if which tmux 2>&1 >/dev/null; then
-	    if [ -t 0 ] && [[ -z $TMUX ]]; then
-		tmux attach -t julia || tmux new -s julia; exit
-	    fi
-	fi
+    if which tmux 2>&1 >/dev/null; then
+        if [ -t 0 ] && [[ -z $TMUX ]]; then
+            tmux attach -t julia || tmux new -s julia; exit
+        fi
+    fi
 }; zle -N tmux_init
 
 # bind keys not in terminfo
@@ -246,3 +257,4 @@ compinit -u -d "$compfile"
 # initialize prompt with a decent built-in theme
 # promptinit
 # prompt adam1
+
