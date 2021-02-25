@@ -38,12 +38,12 @@ let g:clipboard = {
             \   },
             \   'cache_enabled': 1,
             \ }
-nmap <Leader>y "+y "*y
-nmap <Leader>p "+p "*p
-nmap <Leader>d "+d "*d
-nmap <Leader>Y "+y "*y
-nmap <Leader>P "+p "*p
-nmap <Leader>D "+D "*D
+nmap <Leader>y "+y
+nmap <Leader>p "+p
+nmap <Leader>d "+d
+nmap <Leader>Y "*y
+nmap <Leader>P "*p
+nmap <Leader>D "*D
 
 let g:ycm_use_clangd = 1
 let g:ycm_confirm_extra_conf = 0
