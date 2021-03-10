@@ -1,0 +1,106 @@
+#!/bin/rc
+
+PATH=$HOME^'/.local/bin:'^$HOME^'/.cabal/bin:/sbin:/usr/sbin:/opt/sbin:/usr/local/sbin:/bin:/usr/bin:/opt/bin:/usr/local/bin'
+
+LESS='-R'
+LANG='pl_PL.utf8'
+LC_ALL='pl_PL.utf8'
+
+if (~ $HOME/.inputrc 0) {
+    INPUTRC=/etc/inputrc
+}
+
+EDITOR=/opt/bin/nvim
+CC=/usr/bin/tcc
+
+# local rc shell functions and configuration
+
+ps1='['^`{whoami}^'@'^`{hostname}^'] '
+ps2='
+xD :: '
+
+fn refresh_prmpt {
+    prompt=($ps1^`{pwd}^$ps2)
+}
+
+fn start_login {
+    neofetch --shell_version off
+}
+
+fn l {
+    builtin ls --color=always -F $*
+}
+
+fn ls {
+    l $*
+}
+
+fn cdd {
+    builtin cd $1
+    refresh_prmpt
+}
+
+fn cd {
+    cdd $*
+}
+
+fn la {
+    builtin ls --color=always -FAh $*
+}
+
+fn ll {
+    builtin ls --color=always -lFAh $*
+}
+
+fn grep {
+    builtin grep --color=auto $*
+}
+
+fn grepf {
+    builtin grep --color=always --binary-files=without-match -rnH -e $1 $2
+}
+
+fn gs {
+    git status
+}
+
+fn gl {
+    git log
+}
+
+fn gdiff {
+    git difftool $*
+}
+
+fn cdh {
+    builtin cd $HOME
+    refresh_prmpt
+}
+
+fn ned {
+    builtin nvim $*
+}
+
+fn ndiff {
+    builtin nvim -d $*
+}
+
+fn vim {
+    ned $*
+}
+
+fn vimdiff {
+    ndiff $*
+}
+
+fn v {
+    ned $*
+}
+
+refresh_prmpt
+start_login
+
+umask 022
+
+. $HOME/.nix.sh
+# . $HOME/.tmux.sh
