@@ -3,7 +3,7 @@ set nocompatible
 set noerrorbells visualbell t_vb=
 filetype off
 
-set shell=/bin/zsh
+set shell=/bin/rc
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -22,22 +22,23 @@ endif
 Plugin 'Yggdroot/indentLine'
 Plugin 'rrethy/vim-hexokinase'
 Plugin 'franbach/miramare'
+Plugin 'weakish/rcshell.vim'
 
 call vundle#end()
 filetype plugin indent on
 
-let g:clipboard = {
-            \   'name': 'xclip',
-            \   'copy': {
-            \      '+': 'xclip -quiet -i -selection clipboard',
-            \      '*': 'xclip -quiet -i -selection primary',
-            \    },
-            \   'paste': {
-            \      '+': 'xclip -o -selection clipboard',
-            \      '*': 'xclip -o -selection primary',
-            \   },
-            \   'cache_enabled': 1,
-            \ }
+" let g:clipboard = {
+"             \   'name': 'xclip',
+"             \   'copy': {
+"             \      '+': 'xclip -quiet -i -selection clipboard',
+"             \      '*': 'xclip -quiet -i -selection primary',
+"             \    },
+"             \   'paste': {
+"             \      '+': 'xclip -o -selection clipboard',
+"             \      '*': 'xclip -o -selection primary',
+"             \   },
+"             \   'cache_enabled': 1,
+"             \ }
 nmap <Leader>y "+y
 nmap <Leader>p "+p
 nmap <Leader>d "+d
@@ -45,7 +46,7 @@ nmap <Leader>Y "*y
 nmap <Leader>P "*p
 nmap <Leader>D "*D
 
-let g:ycm_use_clangd = 1
+let g:ycm_use_clangd = 0
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_goto_buffer_command = 'new-buffer'
 let g:ycm_min_num_of_chars_for_completion = 3
@@ -132,4 +133,4 @@ let g:Hexokinase_ftOptInPatterns = {
             \     'html': 'full_hex,rgb,rgba,hsl,hsla,colour_names'
             \ }
 
-let g:miramare_transparent_background = 1
+let g:miramare_transparent_background = 0

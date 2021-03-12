@@ -49,7 +49,7 @@ fn la {
 }
 
 fn ll {
-    builtin ls --color=always -lFAh $*
+    builtin ls --color=always --block-size=M -lFAh $*
 }
 
 fn grep {
@@ -97,10 +97,14 @@ fn v {
     ned $*
 }
 
+fn e {
+    ned $*
+}
+
 refresh_prmpt
 start_login
 
 umask 022
 
 . $HOME/.nix.sh
-# . $HOME/.tmux.sh
+. $HOME/.tmux.sh
